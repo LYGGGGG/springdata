@@ -47,4 +47,23 @@ public class JpaTest {
 
         transaction.commit();
     }
+
+    /**
+     * jpql:出错，无法更新
+     */
+    @Test
+    public void testU(){
+        EntityManager entityManager = factory.createEntityManager();
+
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+
+        String jpql = "UPDATE Customer set custName=:cust_name where custId=:id";
+        entityManager.createQuery(jpql).
+                setParameter("cust_name","易二二").
+                setParameter("id",1l);
+
+
+        transaction.commit();
+    }
 }
